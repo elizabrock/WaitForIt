@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WaitForIt.Model;
+using WaitForIt;
 
 namespace WaitForIt
 {
@@ -22,11 +23,19 @@ namespace WaitForIt
     /// </summary>
     public partial class MainWindow : Window
     {
+        //public ObservableCollection<Event> Events;
+        public EventContext _dbContext;
         public MainWindow()
         {
-            new Event("New Year's Eve", "12/31/2015");
-            InitializeComponent();
-            CountdownList.DataContext = Event.Events;
+            using(_dbContext = new EventContext())
+            {
+                _dbContext.Events.Add(new Event("New Year's Eve", "12/31/2015"));
+                _dbContext.Events.Add(new Event("Birthday", "12/25/2015"));
+                _dbContext.SaveChanges();
+                //Events = new ObservableCollection<Event>();
+            }
+                InitializeComponent();
+                CountdownList.DataContext = _dbContext.Events.Local;
         }
     }
 }

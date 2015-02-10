@@ -5,6 +5,11 @@
     <Grid>
         <StackPanel HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="517">
             <ListBox HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="517" Name="CountdownList" ItemsSource="{Binding}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBox Text="{Binding Name}"></TextBox>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
         <Button Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" x:Name="Add" Margin="432,279,0,0"/>

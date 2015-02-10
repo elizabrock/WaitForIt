@@ -9,16 +9,15 @@ namespace WaitForIt.Model
 {
     public class Event
     {
-        public static ObservableCollection<Event> Events = new ObservableCollection<Event>();
 
-        public string Date;
-        public string Name;
+        public int EventId { get; set; }
+        public string Date { get; set; }
+        public string Name { get; set; }
 
         public Event(string EventName, string EventDate)
         {
             this.Name = EventName;
             this.Date = EventDate;
-            Events.Add(this);
         }
     }
 }
