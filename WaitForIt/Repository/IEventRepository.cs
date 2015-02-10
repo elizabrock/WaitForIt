@@ -10,16 +10,15 @@ namespace WaitForIt.Repository
 {
     public interface IEventRepository
     {
-        int GetCount();
-        void Add();
-        void Delete();
-        void Update();
-        void Clear();
-        IQueryable<Event> PastEvents(); // EventRepository.PastEvents.Where(c => c.CalculateMonth() == 2)
-        int CalculateMonth();
-        IQueryable<Event> All();
-        Event GetById(int id);
-        Event GetByDate(string date);
+        int GetCount(); //
+        void Add(Event E); //
+        void Delete(Event E); //
+        void Clear(); //
+        IEnumerable<Event> PastEvents(); //
+        int CalculateMonth(Event E); //
+        IEnumerable<Event> All(); //
+        Event GetById(int id); //
+        Event GetByDate(string date); //
         IQueryable<Event> SearchFor(Expression<Func<Event, bool>> predicate);
 
         

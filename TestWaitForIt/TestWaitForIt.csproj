@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="AddingCountdownsTest.cs" />
     <Compile Include="EventModelTest.cs" />
+    <Compile Include="EventRepositoryTest.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="ViewingCountdownsTest.cs" />
     <Compile Include="ZeroStateTest.cs" />

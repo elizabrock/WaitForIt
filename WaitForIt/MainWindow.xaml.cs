@@ -24,10 +24,10 @@ namespace WaitForIt
     public partial class MainWindow : Window
     {
         //public ObservableCollection<Event> Events;
-        public EventContext _dbContext;
+        //public static EventContext _dbContext;
         public MainWindow()
         {
-            using(_dbContext = new EventContext())
+            using(var _dbContext = new EventContext())
             {
                 _dbContext.Events.Add(new Event("New Year's Eve", "12/31/2015"));
                 _dbContext.Events.Add(new Event("Birthday", "12/25/2015"));
@@ -35,7 +35,9 @@ namespace WaitForIt
                 //Events = new ObservableCollection<Event>();
             }
                 InitializeComponent();
-                CountdownList.DataContext = _dbContext.Events.Local;
+                //CountdownList.DataContext = _dbContext.Events.Local;
+            // _dbContext.Events.Add(......) == _dbContext.Events.Local.Add(.....) == (new ObservableCollection<Event>()).Add(....)
+
         }
     }
 }
