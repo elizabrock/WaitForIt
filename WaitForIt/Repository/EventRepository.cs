@@ -37,6 +37,34 @@ namespace WaitForIt.Repository
 
         public void Add(Model.Event E)
         {
+            /* Solution 1:
+             * Find if the event is in the DB;
+             * 
+             * var query = from Event in _dbContext.Events
+             * where Event.Date == E.Date and Event.Name == E.Name
+             * select Event;
+             * 
+             * if (query.ToList().Count > 0) {
+             *  throw new ArgumentException();
+             * }
+             * 
+             * Solution 2:
+             * 
+             * Migration on the table, adding another field. Like, a hash (Name+Date).
+             * 
+             * var gimme_hash = Sha1.Create(E.Name+E.Date);
+             * gimme_hash.Hash;
+             * _dbContext.Event.Find(e => e.Hash == E.hash);
+             * _dbContext.Event.SingleOrDefault(e => e.Hash == E.hash);
+             * OR use LINQ
+             * 
+             *if (query.ToList().Count > 0) {
+             *  throw new ArgumentException();
+             * }
+             * 
+             * Thinking forward, we want the UI window handling the Event addition to tell the user they
+             * can't add duplicates
+             * */
             _dbContext.Events.Add(E);
             _dbContext.SaveChanges();
         }
