@@ -17,7 +17,7 @@ namespace WaitForIt.Model
 
         public Event()
         {
-
+            // Place holder
         }
 
         public Event(string EventName, string EventDate)

@@ -67,5 +67,17 @@ namespace TestWaitForIt
             repo.Clear();
             Assert.AreEqual(0, repo.GetCount());
         }
+
+        // Execption Tag: We want the Repository to throw an exception instead of adding duplicate
+        // events
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void EventsAreUnique()
+        {
+            Event e = new Event("New Years Eve", "12/31/2015");
+            repo.Clear();
+            repo.Add(e);
+            repo.Add(e);
+        }
     }
 }
