@@ -15,6 +15,12 @@ namespace WaitForIt.Repository
         public EventRepository()
         {
             _dbContext = new EventContext();
+            _dbContext.Events.Load();
+        }
+
+        public EventContext Context()
+        {
+            return _dbContext;
         }
 
         public DbSet<Model.Event> GetDbSet()
@@ -24,14 +30,14 @@ namespace WaitForIt.Repository
 
         public int GetCount()
         {
-            throw new NotImplementedException();
+            return _dbContext.Events.Count<Model.Event>();
 
         }
 
         public void Add(Model.Event E)
         {
-            throw new NotImplementedException();
-            // _dbContext.SaveChanges();
+            _dbContext.Events.Add(E);
+            _dbContext.SaveChanges();
         }
 
         public void Delete(Model.Event E)
@@ -41,9 +47,11 @@ namespace WaitForIt.Repository
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            var a = this.All();
+            _dbContext.Events.RemoveRange(a);
+            _dbContext.SaveChanges();
         }
-
+        
         public IEnumerable<Model.Event> PastEvents()
         {
             throw new NotImplementedException();
@@ -56,7 +64,8 @@ namespace WaitForIt.Repository
 
         public IEnumerable<Model.Event> All()
         {
-            throw new NotImplementedException();
+            var qu = from Event in _dbContext.Events select Event;
+            return qu.ToList<Model.Event>();
         }
 
         public Model.Event GetById(int id)
@@ -70,7 +79,10 @@ namespace WaitForIt.Repository
 
         public Model.Event GetByDate(string date)
         {
-            throw new NotImplementedException();
+            var query = from Event in _dbContext.Events
+                        where Event.Date == date
+                        select Event;
+            return query.First<Model.Event>();
         }
 
         public IQueryable<Model.Event> SearchFor(System.Linq.Expressions.Expression<Func<Model.Event, bool>> predicate)

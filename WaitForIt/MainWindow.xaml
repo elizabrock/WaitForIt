@@ -4,17 +4,16 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="517">
-            <ListBox HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="517" Name="CountdownList" ItemsSource="{Binding}">
+            <ListBox HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="517" Name="CountdownList" ItemsSource="{Binding NotifyOnSourceUpdated=True}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBox Text="{Binding Name}"></TextBox>
+                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"></TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-        <Button Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" x:Name="Add" Margin="432,279,0,0"/>
-        <Path Stroke="Black" StrokeThickness="3" 
-Data="M 375,250 C 450,225 475,250 475,275" Name="GettingStartedArrow" />
+        <Button Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" x:Name="Add" Margin="432,279,0,0" Click="Button_Click"/>
+        <Path Stroke="Black" StrokeThickness="3" Data="M 375,250 C 450,225 475,250 475,275" Name="GettingStartedArrow" />
         <Label HorizontalAlignment="Left" Margin="306,209,0,0" VerticalAlignment="Top" Height="62" Width="99" Name="GettingStartedText">
             <TextBlock Text="Click here to make your first countdown!" TextWrapping="Wrap" Width="89" Height="47" />
         </Label>

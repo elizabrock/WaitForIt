@@ -8,7 +8,7 @@ using WaitForIt.Model;
 
 namespace WaitForIt
 {
-    class EventContext: DbContext
+    public class EventContext: DbContext
     {
         public DbSet<Event> Events { get; set; }
     }

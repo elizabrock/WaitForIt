@@ -13,8 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity;
 using WaitForIt.Model;
+using WaitForIt.Repository;
 using WaitForIt;
+
 
 namespace WaitForIt
 {
@@ -25,19 +28,20 @@ namespace WaitForIt
     {
         //public ObservableCollection<Event> Events;
         //public static EventContext _dbContext;
+        public static EventRepository repo = new EventRepository();
         public MainWindow()
         {
-            using(var _dbContext = new EventContext())
-            {
-                _dbContext.Events.Add(new Event("New Year's Eve", "12/31/2015"));
-                _dbContext.Events.Add(new Event("Birthday", "12/25/2015"));
-                _dbContext.SaveChanges();
-                //Events = new ObservableCollection<Event>();
-            }
-                InitializeComponent();
-                //CountdownList.DataContext = _dbContext.Events.Local;
-            // _dbContext.Events.Add(......) == _dbContext.Events.Local.Add(.....) == (new ObservableCollection<Event>()).Add(....)
-
+           InitializeComponent();
+           CountdownList.DataContext = repo.Context().Events.Local;
         }
+
+        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            repo.Add(new Event("Test", "02/02/2915"));
+        }
+       
+
     }
 }

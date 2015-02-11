@@ -14,35 +14,47 @@ namespace TestWaitForIt
     [TestClass]
     public class EventRepositoryTest
     {
+        private static EventRepository repo;
+
+        [ClassInitialize]
+        public static void SetUp(TestContext _context)
+        {
+            repo = new EventRepository();
+            repo.Clear();
+        }
+
+        [ClassCleanup]
+        public static void CleanUp()
+        {
+            repo.Clear();
+            repo.Dispose();
+        }
  
+        [TestCleanup]
+        public void ClearDatabase()
+        {
+            repo.Clear();
+        }
 
         [TestMethod]
-        public void TestAddToDatabase()
+        public void TestAddToDatabase() //Valid
         {
-            
-            EventRepository repo = new EventRepository();
-            repo.GetDbSet().Add(new Event("New Years Eve", "12/31/2015"));
-            Assert.AreEqual(1, repo.GetDbSet().Local.Count);
-            
+            Assert.AreEqual(0, repo.GetCount());
+            repo.Add(new Event("New Years Eve", "12/31/2015"));
+            Assert.AreEqual(1, repo.GetCount());
         }
 
         [TestMethod]
         public void TestAllMethod()
         {
-            EventRepository repo = new EventRepository();
-            LinkedList<Event> list = new LinkedList<Event>();
-            
-            list.AddLast(new Event("New Years Eve", "12/31/2015"));
-            list.AddLast(new Event("Valentine's Day", "02/14/2015"));
             repo.Add(new Event("New Years Eve", "12/31/2015"));
             repo.Add(new Event("Valentine's Day", "02/14/2015"));
-            Assert.AreEqual(list,repo);
+            Assert.AreEqual(2, repo.GetCount());
         }
 
         [TestMethod]
         public void TestGetCount()
         {
-            EventRepository repo = new EventRepository();
             Assert.AreEqual(0, repo.GetCount());
             repo.Add(new Event("New Years Eve", "12/31/2015"));
             Assert.AreEqual(1, repo.GetCount());
@@ -51,7 +63,6 @@ namespace TestWaitForIt
         [TestMethod]
         public void TestClear()
         {
-            EventRepository repo = new EventRepository();
             repo.Add(new Event("New Years Eve", "12/31/2015"));
             repo.Clear();
             Assert.AreEqual(0, repo.GetCount());
