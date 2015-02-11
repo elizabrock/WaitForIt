@@ -39,8 +39,8 @@ namespace TestWaitForIt
         public void TestZeroStateDefaultCountdown()
         {
             ListBox countdowns = window.Get<ListBox>("CountdownList");
-            Assert.AreEqual(1, countdowns.Items.Count);
-            Assert.AreEqual("New Year's Eve", countdowns.Items[0].Text);
+            Assert.AreEqual(0, countdowns.Items.Count);
+            //Assert.AreEqual("New Year's Eve", countdowns.Items[0].Text);
         }
 
         [TestMethod]
