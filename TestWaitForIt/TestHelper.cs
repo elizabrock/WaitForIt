@@ -18,7 +18,7 @@ namespace TestWaitForIt
     public class TestHelper
     {
         private static TestContext test_context;
-        private static Window window;
+        protected static Window window;
         private static Application application;
         private static EventRepository repo = new EventRepository();
         private static EventContext context;
@@ -149,8 +149,8 @@ namespace TestWaitForIt
         public static void CleanThisUp()
         {
             window.Close();
-            repo.Clear();
             application.Close();
+            repo.Clear();
         }
     }
 }

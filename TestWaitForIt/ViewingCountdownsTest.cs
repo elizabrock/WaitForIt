@@ -15,7 +15,7 @@ namespace TestWaitForIt
         public static void SetupTests(TestContext _context)
         {
             GivenTheseEvents(
-                new Event("Valentine's Day", "02/14/15"),
+                new Event("Valentine's Eve", "02/13/15"),
                 new Event("Christmas", "12/25/14")
                 );
             TestHelper.Setup(_context);
@@ -31,7 +31,7 @@ namespace TestWaitForIt
         public void ScenarioViewingCountdownsWhenThereAreEvents()
         {
             ThenIShouldSeeXEvents(2);
-            AndIShouldSeeACountdownFor("Valentine's Day", "02/14/15");
+            AndIShouldSeeACountdownFor("Valentine's Eve", "02/13/15");
             AndIShouldSeeACountdownFor("Christmas", "12/25/14");
             AndIShouldNotSeeTheHelperText();
             AndTheButtonShouldBeEnabled("+");

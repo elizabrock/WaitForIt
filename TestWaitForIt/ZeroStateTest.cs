@@ -11,21 +11,18 @@ using TestStack.White.UIItems.Finders;
 namespace TestWaitForIt
 {
     [TestClass]
-    public class ZeroStateTest
+    public class ZeroStateTest : TestHelper
     {
-
-        private static TestContext test_context;
-        private static Window window;
-        private static Application application;
-
         [ClassInitialize]
-        public static void Setup(TestContext _context)
+        public static void SetupTests(TestContext _context)
         {
-            test_context = _context;
-            var applicationDir = _context.DeploymentDirectory;
-            var applicationPath = Path.Combine(applicationDir, "..\\..\\..\\TestWaitForIt\\bin\\Debug\\WaitForIt");
-            application = Application.Launch(applicationPath);
-            window = application.GetWindow("MainWindow", InitializeOption.NoCache);
+            TestHelper.Setup(_context);
+        }
+
+        [ClassCleanup]
+        public static void CleanUp()
+        {
+            TestHelper.CleanThisUp();
         }
 
         [TestMethod]
@@ -40,13 +37,6 @@ namespace TestWaitForIt
         {
             var text = window.Get(SearchCriteria.ByAutomationId("GettingStartedText"));
             Assert.IsTrue(text.Visible);
-        }
-
-        [ClassCleanup]
-        public static void CleanThisUp()
-        {
-            window.Close();
-            application.Close();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestStack.BDDfy;
+using WaitForIt.Model;
 
 namespace TestWaitForIt
 {
@@ -17,6 +17,18 @@ namespace TestWaitForIt
         // * Click "Add" to add the event
         // * The event shows up in the main event list and the form goes away
         // * Click "x" to close the form
+
+        [ClassInitialize]
+        public static void SetupTests(TestContext _context)
+        {
+            TestHelper.Setup(_context);
+        }
+
+        [ClassCleanup]
+        public static void CleanUp()
+        {
+            TestHelper.CleanThisUp();
+        }
 
         [TestMethod]
         public void ScenarioHappyPathEventCreation()

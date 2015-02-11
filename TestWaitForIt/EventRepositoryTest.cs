@@ -27,7 +27,6 @@ namespace TestWaitForIt
         public static void CleanUp()
         {
             repo.Clear();
-            repo.Dispose();
         }
  
         [TestCleanup]
@@ -40,14 +39,14 @@ namespace TestWaitForIt
         public void TestAddToDatabase() //Valid
         {
             Assert.AreEqual(0, repo.GetCount());
-            repo.Add(new Event("New Years Eve", "12/31/2015"));
+            repo.Add(new Event("Old Years Eve", "12/31/2015"));
             Assert.AreEqual(1, repo.GetCount());
         }
 
         [TestMethod]
         public void TestAllMethod()
         {
-            repo.Add(new Event("New Years Eve", "12/31/2015"));
+            repo.Add(new Event("Old Years Eve", "12/31/2015"));
             repo.Add(new Event("Valentine's Day", "02/14/2015"));
             Assert.AreEqual(2, repo.GetCount());
         }
@@ -56,14 +55,14 @@ namespace TestWaitForIt
         public void TestGetCount()
         {
             Assert.AreEqual(0, repo.GetCount());
-            repo.Add(new Event("New Years Eve", "12/31/2015"));
+            repo.Add(new Event("Old Years Eve", "12/31/2015"));
             Assert.AreEqual(1, repo.GetCount());
         }
 
         [TestMethod]
         public void TestClear()
         {
-            repo.Add(new Event("New Years Eve", "12/31/2015"));
+            repo.Add(new Event("Old Years Eve", "12/31/2015"));
             repo.Clear();
             Assert.AreEqual(0, repo.GetCount());
         }
@@ -74,10 +73,9 @@ namespace TestWaitForIt
         [ExpectedException(typeof(ArgumentException))]
         public void EventsAreUnique()
         {
-            Event e = new Event("New Years Eve", "12/31/2015");
             repo.Clear();
-            repo.Add(e);
-            repo.Add(e);
+            repo.Add(new Event("Old Years Eve", "12/31/2015"));
+            repo.Add(new Event("Old Years Eve", "12/31/2015"));
         }
     }
 }

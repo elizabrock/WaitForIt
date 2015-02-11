@@ -19,8 +19,8 @@ namespace TestWaitForIt
         [TestMethod]
         public void CreatingAnEventStoresItsProperties()
         {
-            Event valentines = new Event("Valentine's", "02/14/14");
-            Assert.AreEqual("Valentine's", valentines.Name);
+            Event valentines = new Event("Someday", "02/14/14");
+            Assert.AreEqual("Someday", valentines.Name);
             Assert.AreEqual("02/14/14", valentines.Date);
         }
     }
