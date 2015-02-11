@@ -14,6 +14,10 @@ namespace TestWaitForIt
         [ClassInitialize]
         public static void SetupTests(TestContext _context)
         {
+            GivenTheseEvents(
+                new Event("Valentine's Day", "02/14/15"),
+                new Event("Christmas", "12/25/14")
+                );
             TestHelper.Setup(_context);
         }
         
@@ -23,16 +27,9 @@ namespace TestWaitForIt
             TestHelper.CleanThisUp();
         }
 
-        
-
         [TestMethod]
         public void ScenarioViewingCountdownsWhenThereAreEvents()
         {
-            GivenTheseEvents(
-                new Event("Valentine's Day", "02/14/15"),
-                new Event("Christmas", "12/25/14")
-                );
-
             ThenIShouldSeeXEvents(2);
             AndIShouldSeeACountdownFor("Valentine's Day", "02/14/15");
             AndIShouldSeeACountdownFor("Christmas", "12/25/14");

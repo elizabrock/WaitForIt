@@ -68,7 +68,7 @@ namespace TestWaitForIt
             Assert.AreEqual(0, repo.GetCount());
         }
 
-        // Execption Tag: We want the Repository to throw an exception instead of adding duplicate
+        // Exception Tag: We want the Repository to throw an exception instead of adding duplicate
         // events
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]

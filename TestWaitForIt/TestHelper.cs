@@ -10,6 +10,8 @@ using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.Finders;
 using WaitForIt.Repository;
 using WaitForIt;
+using System.Windows.Automation;
+using TestStack.White.UIItems;
 
 namespace TestWaitForIt
 {
@@ -31,9 +33,7 @@ namespace TestWaitForIt
             application = Application.Launch(applicationPath);
             
             window = application.GetWindow("MainWindow", InitializeOption.NoCache);
-            //repo = new EventRepository();
             context = repo.Context();
-            
         }
 
         public void AndIShouldSeeAnErrorMessage(string p)
@@ -43,7 +43,8 @@ namespace TestWaitForIt
 
         public void AndIShouldSeeTheHelperText()
         {
-            throw new NotImplementedException();
+            var text = window.Get(SearchCriteria.ByAutomationId("GettingStartedText"));
+            Assert.IsTrue(text.Visible);
         }
 
         public void ThenIShouldSeeXEvents(int expected)
@@ -59,14 +60,16 @@ namespace TestWaitForIt
             throw new NotImplementedException();
         }
 
-        public void AndTheButtonShouldBeEnabled(string p)
+        public void AndTheButtonShouldBeEnabled(string buttonContent)
         {
-            throw new NotImplementedException();
+            Button button = window.Get<Button>(SearchCriteria.ByText(buttonContent));
+            Assert.IsTrue(button.Enabled);
         }
 
-        public void AndTheButtonShouldBeDisabled(string p)
+        public void AndTheButtonShouldBeDisabled(string buttonContent)
         {
-            throw new NotImplementedException();
+            Button button = window.Get<Button>(SearchCriteria.ByText(buttonContent));
+            Assert.IsFalse(button.Enabled);
         }
 
         public void AndIShouldSeeACountdownFor(string p1, string p2)
@@ -107,7 +110,8 @@ namespace TestWaitForIt
 
         public void AndIShouldNotSeeTheHelperText()
         {
-            throw new NotImplementedException();
+            var text = window.Get(SearchCriteria.ByAutomationId("GettingStartedText"));
+            Assert.IsFalse(text.Visible);
         }
 
         public void ThenIShouldSeeTheEventForm()
@@ -130,12 +134,8 @@ namespace TestWaitForIt
             Assert.AreEqual(0,repo.GetCount());
         }
 
-        public void GivenTheseEvents(params Event[] events)
+        public static void GivenTheseEvents(params Event[] events)
         {
-            repo.Add(events[0]);
-            repo.Add(events[1]);
-            
-            
             foreach (Event evnt in events)
             {
                 // Add event to Events here.
@@ -143,12 +143,11 @@ namespace TestWaitForIt
             }
             
             //context.SaveChanges();
-            Assert.AreEqual(2*events.Length, repo.GetCount());
+            Assert.AreEqual(events.Length, repo.GetCount());
         }
 
         public static void CleanThisUp()
         {
-            
             window.Close();
             repo.Clear();
             application.Close();

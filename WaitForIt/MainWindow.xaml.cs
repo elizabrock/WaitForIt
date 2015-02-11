@@ -33,6 +33,10 @@ namespace WaitForIt
         {
            InitializeComponent();
            CountdownList.DataContext = repo.Context().Events.Local;
+           if(repo.GetCount() > 1){
+               GettingStartedText.Visibility = Visibility.Hidden;
+               GettingStartedArrow.Visibility = Visibility.Hidden;
+           }
         }
 
         
