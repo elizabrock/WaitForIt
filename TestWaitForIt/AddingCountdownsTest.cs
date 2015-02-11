@@ -34,14 +34,13 @@ namespace TestWaitForIt
         public void ScenarioHappyPathEventCreation()
         {
             GivenThereAreNoEvents();
-            ThenIShouldSeeACountdownFor("New Year's", "12/31/15");
             WhenIClick("+");
             ThenIShouldSeeTheEventForm();
             AndIShouldNotSeeTheHelperText();
             AndTheEventDateShouldBe30DaysFromNow();
             AndTheButtonShouldBeDisabled("+");
             WhenIFillInEventTitleWith("Valentine's");
-            AndIChooseTheEventDate("02/14/15");
+            AndIChooseTheEventDate(new DateTime(2015, 02, 14));
             AndIClick("Add");
             ThenIShouldNotSeeTheEventForm();
             AndIShouldSeeXEvents(1);
@@ -59,7 +58,7 @@ namespace TestWaitForIt
             ThenIShouldSeeTheEventForm();
             AndIShouldSeeAnErrorMessage("Event title must be filled in.");
             WhenIFillInEventTitleWith("Valentine's");
-            AndIChooseTheEventDate("02/14/15");
+            AndIChooseTheEventDate(new DateTime(2015, 02, 14));
             AndIClick("Add");
             ThenIShouldNotSeeTheEventForm();
             AndIShouldSeeXEvents(1);
@@ -72,7 +71,7 @@ namespace TestWaitForIt
             GivenThereAreNoEvents();
             WhenIClick("+");
             WhenIFillInEventTitleWith("Valentine's");
-            AndIChooseTheEventDate("02/14/15");
+            AndIChooseTheEventDate(new DateTime(2015, 02, 14));
             AndIClick("Cancel");
             ThenIShouldNotSeeTheEventForm();
             AndIShouldSeeXEvents(0);

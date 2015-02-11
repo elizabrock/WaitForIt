@@ -11,6 +11,11 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <StackPanel Width="517" Orientation="Horizontal" x:Name="NewEventForm" Visibility="Collapsed">
+                <TextBox Name="EventTitle" Margin="5" Width="120" />
+                <DatePicker Name="EventDate" Margin="5" />
+                <Button Content="Add" Margin="5" Name="AddEvent" Click="AddEvent_Click" />
+            </StackPanel>
         </StackPanel>
         <Button Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" x:Name="Add" Margin="432,279,0,0" Click="Button_Click"/>
         <Path Stroke="Black" StrokeThickness="3" Data="M 375,250 C 450,225 475,250 475,275" Name="GettingStartedArrow" />

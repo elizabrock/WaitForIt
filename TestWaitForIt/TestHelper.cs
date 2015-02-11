@@ -55,9 +55,9 @@ namespace TestWaitForIt
             Assert.AreEqual(expected, list_box.Items.Count);
         }
 
-        public void AndIShouldSeeXEvents(int p)
+        public void AndIShouldSeeXEvents(int x)
         {
-            throw new NotImplementedException();
+            ThenIShouldSeeXEvents(x);
         }
 
         public void AndTheButtonShouldBeEnabled(string buttonContent)
@@ -85,27 +85,33 @@ namespace TestWaitForIt
 
         public void ThenIShouldNotSeeTheEventForm()
         {
-            throw new NotImplementedException();
+            Button button = window.Get<Button>(SearchCriteria.ByAutomationId("AddEvent"));
+            Assert.IsFalse(button.Visible);
         }
 
-        public void AndIClick(string p)
+        public void AndIClick(string buttonContent)
         {
-            throw new NotImplementedException();
+            WhenIClick(buttonContent);
         }
 
-        public void AndIChooseTheEventDate(string p)
+        public void AndIChooseTheEventDate(DateTime newDate)
         {
-            throw new NotImplementedException();
+            DateTimePicker picker = window.Get<DateTimePicker>(SearchCriteria.ByAutomationId("EventDate"));
+            picker.SetValue(newDate);
         }
 
-        public void WhenIFillInEventTitleWith(string p)
+        public void WhenIFillInEventTitleWith(string value)
         {
-            throw new NotImplementedException();
+            var textBox = window.Get<TextBox>("EventTitle");
+            textBox.SetValue(value);
         }
 
         public void AndTheEventDateShouldBe30DaysFromNow()
         {
-            throw new NotImplementedException();
+            DateTimePicker picker = window.Get<DateTimePicker>(SearchCriteria.ByAutomationId("EventDate"));
+            DateTime? actual = picker.Date;
+            DateTime expected = DateTime.Today.AddDays(30);
+            Assert.AreEqual(expected, actual);
         }
 
         public void AndIShouldNotSeeTheHelperText()
@@ -116,12 +122,14 @@ namespace TestWaitForIt
 
         public void ThenIShouldSeeTheEventForm()
         {
-            throw new NotImplementedException();
+            Button button = window.Get<Button>(SearchCriteria.ByAutomationId("AddEvent"));
+            Assert.IsTrue(button.Visible);
         }
 
-        public void WhenIClick(string p)
+        public void WhenIClick(string buttonContent)
         {
-            throw new NotImplementedException();
+            Button button = window.Get<Button>(SearchCriteria.ByText(buttonContent));
+            button.Click();
         }
 
         public void ThenIShouldSeeACountdownFor(string p1, string p2)

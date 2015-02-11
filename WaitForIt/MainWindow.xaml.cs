@@ -34,18 +34,28 @@ namespace WaitForIt
            InitializeComponent();
            CountdownList.DataContext = repo.Context().Events.Local;
            if(repo.GetCount() > 1){
-               GettingStartedText.Visibility = Visibility.Hidden;
-               GettingStartedArrow.Visibility = Visibility.Hidden;
+               HideHelpMessages();
            }
         }
 
-        
+        private void HideHelpMessages()
+        {
+            GettingStartedText.Visibility = Visibility.Hidden;
+            GettingStartedArrow.Visibility = Visibility.Hidden;
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            repo.Add(new Event("Test", "02/02/2915"));
+            NewEventForm.Visibility = Visibility.Visible;
+            EventDate.SelectedDate = DateTime.Today.AddDays(30);
+            Add.IsEnabled = false;
+            HideHelpMessages();
         }
-       
 
+        private void AddEvent_Click(object sender, RoutedEventArgs e)
+        {
+            NewEventForm.Visibility = Visibility.Collapsed;
+            repo.Add(new Event(EventTitle.Text, EventDate.SelectedDate.ToString()));
+        }
     }
 }
