@@ -75,7 +75,6 @@
     <Compile Include="EventModelTest.cs" />
     <Compile Include="EventRepositoryTest.cs" />
     <Compile Include="TestHelper.cs" />
-    <Compile Include="TestingBase.cs" />
     <Compile Include="ViewingCountdownsTest.cs" />
     <Compile Include="ZeroStateTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
