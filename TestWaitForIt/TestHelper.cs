@@ -22,19 +22,21 @@ namespace TestWaitForIt
         private static Application application;
         private static EventRepository repo = new EventRepository();
         private static EventContext context;
+        private static String applicationPath;
 
-        public static void Setup(TestContext _context)
+        public static void SetupClass(TestContext _context)
         {
-            test_context = _context;
-            
             var applicationDir = _context.DeploymentDirectory;
-            var applicationPath = Path.Combine(applicationDir, "..\\..\\..\\TestWaitForIt\\bin\\Debug\\WaitForIt");
+            applicationPath = Path.Combine(applicationDir, "..\\..\\..\\TestWaitForIt\\bin\\Debug\\WaitForIt");
+        }
 
+        public static void TestPrep()
+        {
             application = Application.Launch(applicationPath);
-            
             window = application.GetWindow("MainWindow", InitializeOption.NoCache);
             context = repo.Context();
         }
+
 
         public void AndIShouldSeeAnErrorMessage(string p)
         {

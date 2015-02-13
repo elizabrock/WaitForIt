@@ -10,19 +10,25 @@ namespace TestWaitForIt
         // As a user
         // In order to have hope in my life
         // I want to see the countdowns to the events that I'm looking forward to
-        
         [ClassInitialize]
-        public static void SetupTests(TestContext _context)
+        public static void Setup(TestContext _context)
+        {
+            TestHelper.SetupClass(_context);
+        }
+
+        [TestInitialize]
+        public void SetupTests()
         {
             GivenTheseEvents(
                 new Event("Valentine's Eve", "02/13/15"),
                 new Event("Christmas", "12/25/14")
                 );
-            TestHelper.Setup(_context);
+            TestHelper.TestPrep();
+            
         }
         
-        [ClassCleanup]
-        public static void CleanUp()
+        [TestCleanup]
+        public void CleanUp()
         {
             TestHelper.CleanThisUp();
         }
