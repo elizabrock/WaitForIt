@@ -16,11 +16,17 @@ namespace TestWaitForIt
         [ClassInitialize]
         public static void SetupTests(TestContext _context)
         {
-            TestHelper.Setup(_context);
+            TestHelper.SetupClass(_context);
         }
 
-        [ClassCleanup]
-        public static void CleanUp()
+        [TestInitialize]
+        public void SetupTests()
+        {
+            TestHelper.TestPrep();
+        }
+
+        [TestCleanup]
+        public void CleanUp()
         {
             TestHelper.CleanThisUp();
         }
