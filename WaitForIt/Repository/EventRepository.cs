@@ -13,9 +13,9 @@ namespace WaitForIt.Repository
     {
         private EventContext _dbContext;
 
-        public EventRepository()
+        public EventRepository(string connection = "WaitForIt.EventContext")
         {
-            _dbContext = new EventContext();
+            _dbContext = new EventContext(connection);
             _dbContext.Events.Load();
         }
 
@@ -93,6 +93,8 @@ namespace WaitForIt.Repository
 
         public IEnumerable<Model.Event> All()
         {
+            // First look to see if the stash is populated. If so
+            // then return that stash otherwise do what's below.
             var qu = from Event in _dbContext.Events select Event;
             return qu.ToList<Model.Event>();
         }

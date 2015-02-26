@@ -8,6 +8,9 @@ namespace WaitForIt.Migrations
         public override void Up()
         {
             AddColumn("dbo.Events", "Hash", x => x.String());
+            
+            // How to give a field the NOT NULL constraint and provide default values
+            //AddColumn("dbo.Events", "Hash", x => x.String(nullable: false, defaultValue: "xxxxxxxxx"));
         }
         
         public override void Down()
