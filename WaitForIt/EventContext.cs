@@ -10,7 +10,10 @@ namespace WaitForIt
 {
     public class EventContext: DbContext
     {
+        public EventContext(string connection="WaitForIt.EventContext") : base(connection)
+        {
 
+        }
         public DbSet<Event> Events { get; set; }
     }
 }
