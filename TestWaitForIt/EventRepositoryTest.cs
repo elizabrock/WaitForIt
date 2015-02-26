@@ -19,7 +19,9 @@ namespace TestWaitForIt
         [ClassInitialize]
         public static void SetUp(TestContext _context)
         {
-            repo = new EventRepository();
+            // Pass the name of the connection string TAG not the
+            // name of the database you want to use
+            repo = new EventRepository("Name=TestDB");
             repo.Clear();
         }
 
